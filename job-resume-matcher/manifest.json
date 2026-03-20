@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Job Resume Matcher - Auto Apply Assistant",
+  "version": "1.0.0",
+  "description": "Automatically find matching jobs, customize your resume, and generate tailored PDFs for each application, Daily job search and resume customization tool",
+  "permissions": [
+    "storage",
+    "alarms",
+    "downloads",
+    "notifications",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://*.glassdoor.com/*",
+    "https://api.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/jobs/*",
+        "https://*.indeed.com/viewjob*",
+        "https://*.glassdoor.com/Job/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}

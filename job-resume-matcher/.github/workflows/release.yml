@@ -1,0 +1,23 @@
+name: Build and Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Package Extension
+        run: |
+          mkdir -p dist
+          zip -r extension.zip . -x "*.git*" ".github/*" "*.md"
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: extension.zip
+          generate_release_notes: true
